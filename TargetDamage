@@ -1,0 +1,43 @@
+using UnityEngine;
+using System.Collections;
+
+public class TargetDamage : MonoBehaviour 
+{
+
+  public int hitPoints=2;
+  public Sprite damagedSprite;
+  public float damageImpactSpeed;
+  private int currentHitPoints;
+  private float damageImpactSpeedSqr;
+  private SpriteRenderer spriteRenderer;
+  
+  void Start ()
+  {
+    SpriteRenderer=GetComponent<SpriteRenderer>();
+    currentHitPoints=hitPoints;
+    damageImpactSpeedSqr=damageImpactSpeed*damageImpactSpeed;
+  }
+  
+  void OnCollisionEnter2D(Collision2D collision)
+  {
+    if(collision.collider.tag !="Damager")
+      return;
+      
+    if(collision.relativeVelocity.sqrMagnitude<damageImpactSpeed;
+      return;
+      
+    spriteRender.sprite=damagedSprite;
+    currentHitPoint--;
+    
+    if(currentHitPoint<=0
+      Kill();
+  }
+  
+  void Kill()
+  {
+    spriteRenderer.enabled=false;
+    collider2D.enabled=false;
+    rigidbody2D.isKenematic=true;
+    particleSystem.Play();
+  }
+}
