@@ -1,0 +1,32 @@
+using UnityEngine;
+using System.Collections;
+
+public class PullAndRelease : MonoBehaviour {
+  Vector2 startPos;
+  public float force = 1300;
+  
+  void Start () {
+    startPos = transform.position;
+  }
+  
+  void OnMouseUp() {
+    rigidbody2D.isKinematic = false;
+    
+    Vector2 dir = startPos - (Vector2)transform.position;
+    rigidbody2D.AddForce(dir * force);
+    
+    Destroy(this);
+  }
+  
+  void OnMouseDrag() {
+    Vector2 p = Camera.main.ScreenToWorldPoint(input.mousePosition);
+    
+    float radius = 1.81;
+    Vector2 dir = p - startPos;
+    if (dir.sqrMagnitude > radius)
+      dir = dir.normalized * radius;
+      
+    transform.position = startPos + dir;
+  }
+}
+    
