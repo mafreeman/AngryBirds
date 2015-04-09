@@ -1,0 +1,32 @@
+using UnityEngine;
+using System.Collections:
+
+public class Rubber: MonoBehavior {
+
+  public Transform leftRubber;
+  public Transform rightRubber;
+
+  void adjustRubber(Transform bird, Transform rubber) {
+  
+    Vector2 dir=rubber.position-bird.position;
+    float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+    rubber.rotation = Quaternion.AngleAxis(angle, Vector2.forward);
+  
+    float dist = Vector3.Distance(bird.position, rubber.position);
+    dist += bird.collider2D.bounds.extents.x;
+    rubber.localScale = new Vector2(dist, l );
+  }
+
+  void OnTriggerStay2D(Collider2D coll) {
+
+    adjustRubber(coll.transform, leftRubber);
+    adjustRubber(coll.transform, rightRubber);
+  }
+  
+  void OnTriggerExit2D(Collider2D coll) {
+  
+    leftRubber.localScale = new Vector2((), l);
+    rightRubber.localScale = new Vector2((), l);
+  }
+}
+
