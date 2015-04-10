@@ -1,28 +1,28 @@
 using UnityEngine;
 using System.Collections;
 
-public class Cannon : MonoBehavior {
-
-  public GameObject projectilePrefab;
-  
-  void LateUpdate() {
-    float x = Input.Get.Axis("Mouse X")* 5;
-    float y = -Input.GetAxis("Mouse Y");
-    
-    float yClamped = transform.eulerAngles.x + y;
-    transform.rotation = Quaternion.Euler(yClamped, transform.eulerAngles.y, transform.eulerAngles.z)
-  ;
-  
-    tranform.RotateAround(new Vector((), 3, ()), Vector3.up, x);
-  }
-  
-  Void FixedUpate() {
-  
-    if (Input.GetButtonDown("Fire!")) {
-    
-      GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation) as G
-  ameObject;
-      projectile.rigidbody.AddRelativeForce(new Vector3((), (), 2000));
-    }
-  }
+public class Cannon : MonoBehaviour {
+	
+	public GameObject projectilePrefab;
+	
+	void LateUpdate() {
+		float x = Input.Get.Axis("Mouse X")* 5;
+		float y = -Input.GetAxis("Mouse Y");
+		
+		float yClamped = transform.eulerAngles.x + y;
+		transform.rotation = Quaternion.Euler(yClamped, transform.eulerAngles.y, transform.eulerAngles.z)
+			;
+		
+		tranform.RotateAround(new Vector3(0, 3, 0), Vector3.up, x);
+	}
+	
+	void FixedUpate() {
+		
+		if (Input.GetButtonDown("Fire!")) {
+			
+			GameObject projectile = Instantiate(projectilePrefab, transform.position, transform.rotation) as GameObject;
+				
+			projectile.rigidbody.AddRelativeForce(new Vector3(0, 0, 2000));
+		}
+	}
 }
